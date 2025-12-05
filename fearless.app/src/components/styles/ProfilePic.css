@@ -1,0 +1,17 @@
+.profilePic{
+    position: relative;
+    display: inline-block;
+    top: 3%;
+    left: 90%;
+    height:50px;
+    width:50px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #6a02f2, #FFFFFF);
+    border:none;
+}
+.options{
+    position:absolute;
+    background-color: #000000;
+    left: 90%;
+    border-radius: 10px;
+}

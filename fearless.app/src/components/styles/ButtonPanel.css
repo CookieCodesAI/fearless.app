@@ -1,0 +1,98 @@
+.container-panel{
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+    border-style: solid;
+    display: grid;
+    grid-template-columns: repeat(2,45vw);
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+    padding-left: 23px;
+    padding-top:10px;
+    box-sizing: border-box;
+}
+.big-call{
+    position: relative;
+    left: 5%;
+    width: 450px;
+    height: 200px;
+    background-color: #f782a2;
+    border-radius: 10px;
+    flex-shrink: 0;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    padding: 10px;
+    align-items: flex-start;       
+    box-sizing: border-box;
+}
+.small-call{
+    width: 220px;
+    height: 150px;
+    background-color: #7e79bb;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    padding: 10px;
+    align-items: flex-start;       
+    box-sizing: border-box;
+}
+.text{
+    width: 220px;
+    height: 150px;
+    background-color: #f782a2;
+    border-radius: 10px;
+    flex-shrink: 0;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    padding: 10px;
+    align-items: flex-start;       
+    box-sizing: border-box;
+}
+.location{
+    width: 220px;
+    height: 150px;
+    background-color: #f782a2;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    padding: 10px;
+    align-items: flex-start;       
+    box-sizing: border-box;
+}
+.live-stream{
+    width: 220px;
+    height: 150px;
+    background-color: #7e79bb;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    padding: 10px;
+    align-items: flex-start;       
+    box-sizing: border-box;
+}
+.small-text{
+    font-size: 12px;
+}
+.medium-text{
+    font-size: 36px;
+    text-wrap:nowrap;
+}
+.big-text{
+    font-size: 64px;
+}
+.bottom-small-text{
+    font-size: 12px;
+    text-wrap:nowrap;
+}
+.regular-text {
+    font-size: 36px;
+}
