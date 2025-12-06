@@ -1,5 +1,38 @@
-.likes{
+.stream-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.likes {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    display: block; 
+    z-index: 2;
+}
+.webcam{
+    width:100%s;
+    height:100%;
+    display:block;
+    z-index:1;
+    object-fit: cover;
+}
+.end-live{
+    z-index: 3;
+    border:white solid 2px;
     position: absolute;
-    top: 20%;
-    left: 50%;
+    top:85%;
+    background-color: hsl(301, 100%, 78%);
+    font-size: 20px;
+    text-align: top;
+    text-wrap: nowrap;
+    width: 200px;
+    height:40px;
+    border-radius:10px;
+
 }
