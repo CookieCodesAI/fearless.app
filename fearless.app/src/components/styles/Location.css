@@ -1,0 +1,19 @@
+/* Make the page take up the full screen with no scrolling issues */
+.location-page {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* The map container MUST fill the entire page */
+.map-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Optional: Remove default body scrollbars for this page */
+body {
+  overflow: hidden;
+}
+
