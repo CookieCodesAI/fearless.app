@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet';
 import React from 'react';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -9,14 +9,11 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import { useNavigate } from 'react-router-dom';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
+import { CircleMarker } from 'react-leaflet'; 
+import '../components/styles/Location.css';
 
 
-const userIcon = L.icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-    iconSize: [25,40],
-    iconAnchor: [12,40],
-    popupAnchor: [0,-50],
-});
+
 
 const safeIcon = L.icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
@@ -24,6 +21,80 @@ const safeIcon = L.icon({
     iconAnchor: [12,25],
     popupAnchor: [0,-25],
 });
+
+const hospitalIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/3809/3809392.png',
+    iconSize: [20, 30],
+    iconAnchor: [12, 25],
+    popupAnchor: [0, -25],
+});
+
+const policeIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/11618/11618268.png',
+    iconSize: [20, 30],
+    iconAnchor: [12, 25],
+    popupAnchor: [0, -25],
+});
+
+const fireStationIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/12247/12247281.png',
+    iconSize: [20, 30],
+    iconAnchor: [12, 25],
+    popupAnchor: [0, -25],
+});
+
+const storeIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/2639/2639570.png',
+    iconSize: [20, 30],
+    iconAnchor: [12, 25],
+    popupAnchor: [0, -25],
+});
+
+const libraryIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/1164/1164651.png',
+    iconSize: [20, 30],
+    iconAnchor: [12, 25],
+    popupAnchor: [0, -25],
+});
+
+const schoolIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/8907/8907406.png',
+    iconSize: [20, 30],
+    iconAnchor: [12, 25],
+    popupAnchor: [0, -25],
+});
+
+const pharmacyIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/2805/2805080.png',
+    iconSize: [20, 30],
+    iconAnchor: [12, 25],
+    popupAnchor: [0, -25],
+});
+
+function getMarkerIcon(type) {
+    switch (type) {
+        case 'hospital':
+            return hospitalIcon;
+        case 'police':
+            return policeIcon;
+        case 'fire_station':
+            return fireStationIcon;
+        case 'pharmacy':
+            return pharmacyIcon;
+        case 'library':
+            return libraryIcon;
+        case 'school':
+            return schoolIcon;
+        case 'college':
+            return schoolIcon;
+        case 'supermarket':
+            return storeIcon;
+        case 'convenience':
+            return storeIcon;
+        default:
+            return safeIcon;
+    }
+}
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -147,6 +218,7 @@ async function fetchSafeLocations(lat, lng, radius = 3000) {
             .map((el) => ({
                 id: el.id,
                 name: el.tags?.name || el.tags?.amenity || "Safe Place",
+                type: el.tags?.amenity || el.tags?.shop || "safe",
                 lat: el.lat ?? el.center?.lat,
                 lng: el.lon ?? el.center?.lon,
             }))
@@ -225,10 +297,24 @@ export default function Location() {
                 <TileLayer url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
                 {/*User's marker */}
-                <Marker position={[userLocation.lat, userLocation.lng]} icon={userIcon}>
+               <CircleMarker
+                    center={[userLocation.lat, userLocation.lng]}
+                    radius={10}
+                    pathOptions={{
+                        color: '#3388ff',
+                        fillColor: '#3388ff',
+                        fillOpacity: 0.9,
+                        weight: 2,
+                    }}
+                >
                     <Popup>Your Location</Popup>
-                </Marker>
+                </CircleMarker>
 
+                <Circle
+                    center={[userLocation.lat, userLocation.lng]}
+                    radius = {userLocation.accuracy ?? 50}
+                    pathOptions = {{ color: '#3388ff33', fillColor: '#3388ff33' , fillOpacity: 0.2}}
+                />
                 {/*Recenter map when user moves */ }
                 <RecenterMap position={userLocation} />
 
@@ -238,7 +324,7 @@ export default function Location() {
                     <Marker 
                         key={loc.id} 
                         position={[loc.lat, loc.lng]} 
-                        icon={safeIcon}
+                        icon={getMarkerIcon(loc.type)}
                         eventHandlers={{
                             click: () =>  
                                 setSelectedDestination({ lat: loc.lat, lng: loc.lng }),
